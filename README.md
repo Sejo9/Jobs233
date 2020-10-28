@@ -1,2 +1,2 @@
 # Jobs233
-The android app for the Jobs233 web project
+The android app for the Jobs233 web project currently under development
