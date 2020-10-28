@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Jobs233</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="password">Password</string>
+    <string name="password_advice">All new passwords must contain at least 8 characters. We also suggest having at least one uppercase and one lowercase letter (Aa – Zz), one special symbol (#, %, etc) and one number (0 – 9) in your password for the best strength.</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="account_information">Account Information</string>
+    <string name="t_and_c_use">By clicking the button below, your agree to our Terms and Conditions of use</string>
+    <string name="hire">Hire</string>
+    <string name="register">Register</string>
+    <string name="work">Work</string>
+    <string name="account_type">Account Type</string>
+    <string name="already_a_member">Already a member?\ </string>
+    <string name="login">Login</string>
+    <string name="email_username">Email / Username</string>
+    <string name="login_logo">login logo</string>
+    <string name="signup">SignUp</string>
+    <string name="not_a_member">Not a member?</string>
+    <string name="splash_image">splash image</string>
+</resources>
