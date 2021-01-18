@@ -24,6 +24,7 @@
         android:layout_marginHorizontal="30dp"
         app:hintTextColor="@color/orange"
         app:errorEnabled="true"
+        app:errorTextColor="@color/red"
         app:layout_constraintTop_toBottomOf="@id/ai_title">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -42,6 +43,7 @@
         android:layout_marginHorizontal="30dp"
         app:hintTextColor="@color/orange"
         app:errorEnabled="true"
+        app:errorTextColor="@color/red"
         app:layout_constraintTop_toBottomOf="@id/username_layout">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -60,6 +62,8 @@
         android:layout_marginHorizontal="30dp"
         app:hintTextColor="@color/orange"
         app:errorEnabled="true"
+        app:errorTextColor="@color/red"
+        app:passwordToggleEnabled="true"
         app:layout_constraintTop_toBottomOf="@id/sign_email_layout">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -85,7 +89,31 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/orange"
         android:src="@drawable/ic_arrow_forward_24"
+        android:transitionName="signup_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/sign_member"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/already_a_member" />
+
+        <TextView
+            android:id="@+id/ai_login_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:textColor="@color/orange" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

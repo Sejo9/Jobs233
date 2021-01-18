@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircularImageView">
+        <attr name="circularSrc" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="DotLoader">
+        <attr name="loaderColor" format="color" />
+    </declare-styleable>
+</resources>

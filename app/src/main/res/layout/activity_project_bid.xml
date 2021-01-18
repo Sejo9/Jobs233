@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.ProjectBidActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/bid_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/bid_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/titilliumweb_bold"
+                android:text="Category > Subcategory"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/helvetica"
+                android:text="Description"
+                android:textColor="@color/orange"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/bid_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/worksans_regular"
+                android:text="@string/lorem_ipsum"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/helvetica"
+                android:text="Skills"
+                android:textColor="@color/orange"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/bid_skills"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/worksans_regular"
+                android:text="@string/some_tags_and_skills"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/helvetica"
+                android:text="Tags"
+                android:textColor="@color/orange"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/bid_tags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/worksans_regular"
+                android:text="@string/some_tags_and_skills"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/helvetica"
+                android:text="Attachments"
+                android:textColor="@color/orange"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/helvetica"
+                android:text="Activities On This Job"
+                android:textColor="@color/orange"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/bid_bids_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/worksans_regular"
+                android:text="Bids: "
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/bid_views"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/worksans_regular"
+                android:text="Views: "
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/helvetica"
+                android:text="Budget"
+                android:textColor="@color/orange"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/bid_budget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/worksans_regular"
+                android:text="$1000.00"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/bid_created_by"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/helvetica"
+                android:text="Created 2 months ago by"
+                android:textColor="@color/orange"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <com.sejo.custodianlibrary.CircularImageView
+                    android:id="@+id/bid_client_pic"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:circularSrc="@drawable/default_profile" />
+
+                <TextView
+                    android:id="@+id/bid_client_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/worksans_regular"
+                    android:text="Client Name"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/bid_joined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/worksans_regular"
+                android:text="Joined "
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/helvetica"
+                android:text="Interested in this project? Bid Now"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/worksans_regular"
+                android:text="I'm willing to do this job at  "
+                android:textColor="@color/black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/bid_currency_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:entries="@array/currency_entries" />
+
+                <EditText
+                    android:id="@+id/bid_offer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:hint="@string/bidding_amount"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/helvetica"
+                android:labelFor="@id/bid_add_details"
+                android:text="Additional Details"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/bid_add_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:inputType="textMultiLine" />
+
+            <Button
+                android:id="@+id/bid_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/orange_rounded_back"
+                android:text="Bid"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

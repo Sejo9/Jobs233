@@ -24,6 +24,7 @@
         android:layout_marginTop="20dp"
         app:hintTextColor="@color/orange"
         app:errorEnabled="true"
+        app:errorTextColor="@color/red"
         app:layout_constraintTop_toBottomOf="@id/pi_title">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -42,6 +43,7 @@
         android:layout_marginHorizontal="30dp"
         app:hintTextColor="@color/orange"
         app:errorEnabled="true"
+        app:errorTextColor="@color/red"
         app:layout_constraintTop_toBottomOf="@id/first_name_layout">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -62,5 +64,28 @@
         android:src="@drawable/ic_arrow_forward_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/sign_member"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/already_a_member" />
+
+        <TextView
+            android:id="@+id/pi_login_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:textColor="@color/orange" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

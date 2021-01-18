@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <EditTextPreference
+        android:title="Full Name"
+        android:key="fullname"
+        app:useSimpleSummaryProvider="true"
+        app:iconSpaceReserved="false" />
+
+    <EditTextPreference
+        android:title="@string/username"
+        android:key="username"
+        app:useSimpleSummaryProvider="true"
+        app:iconSpaceReserved="false" />
+
+    <EditTextPreference
+        android:title="@string/email"
+        android:key="email"
+        app:useSimpleSummaryProvider="true"
+        app:iconSpaceReserved="false" />
+
+    <EditTextPreference
+        android:title="Phone Number"
+        android:key="phone"
+        app:useSimpleSummaryProvider="true"
+        app:iconSpaceReserved="false" />
+
+    <EditTextPreference
+        android:title="Bio"
+        android:key="bio"
+        app:useSimpleSummaryProvider="true"
+        app:iconSpaceReserved="false" />
+
+    <EditTextPreference
+        android:title="Country"
+        android:key="country"
+        app:useSimpleSummaryProvider="true"
+        app:iconSpaceReserved="false" />
+
+    <EditTextPreference
+        android:title="City"
+        android:key="city"
+        app:useSimpleSummaryProvider="true"
+        app:iconSpaceReserved="false" />
+
+    <EditTextPreference
+        android:title="Address"
+        android:key="address"
+        app:useSimpleSummaryProvider="true"
+        app:iconSpaceReserved="false" />
+</PreferenceScreen>

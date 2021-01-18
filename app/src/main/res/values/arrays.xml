@@ -1,0 +1,13 @@
+<resources>
+    <!-- Reply Preference -->
+    <string-array name="currency_entries">
+        <item>USD</item>
+        <item>GHC</item>
+    </string-array>
+
+    <string-array name="status_entries">
+        <item>In Progress</item>
+        <item>Submitted for review</item>
+    </string-array>
+
+</resources>

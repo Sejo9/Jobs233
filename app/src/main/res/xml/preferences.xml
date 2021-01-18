@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:title="User Settings"
+        app:iconSpaceReserved="false">
+
+        <Preference
+            android:key="profile_pref"
+            android:title="Edit Profile"
+            app:iconSpaceReserved="false"
+            app:allowDividerBelow="true" />
+
+        <Preference
+            android:key="notifications_pref"
+            android:title="Notifications"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:title="Other"
+        app:iconSpaceReserved="false">
+
+        <Preference
+            android:key="about_pref"
+            android:title="About Jobs233"
+            app:iconSpaceReserved="false"
+            app:allowDividerBelow="true" />
+
+        <Preference
+            android:key="logout_pref"
+            android:title="@string/logout"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+
+</PreferenceScreen>
