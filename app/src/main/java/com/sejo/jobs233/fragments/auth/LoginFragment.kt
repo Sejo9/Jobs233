@@ -45,9 +45,9 @@ class LoginFragment : Fragment() {
             validate()
         }
 
-        forgot_password.setOnClickListener {
+        forgot_password.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_loginFragment_to_forgotPasswordFragment)
-        }
+        )
 
         signup_label.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_loginFragment_to_PIFragment)

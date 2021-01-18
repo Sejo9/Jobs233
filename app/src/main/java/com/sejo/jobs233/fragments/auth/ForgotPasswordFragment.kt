@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import com.sejo.jobs233.R
 import com.sejo.jobs233.viewmodels.auth.ForgotPasswordViewModel
 import kotlinx.android.synthetic.main.forgot_password_fragment.*
@@ -42,7 +41,7 @@ class ForgotPasswordFragment : Fragment() {
         })
 
         viewModel.linkSent.observe(viewLifecycleOwner, Observer {
-            view.findNavController().navigate(R.id.action_forgotPasswordFragment_to_loginFragment)
+
         })
     }
 
