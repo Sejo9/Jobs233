@@ -11,6 +11,11 @@
         android:title="@string/projects" />
 
     <item
+        android:id="@+id/walletFragment"
+        android:icon="@drawable/ic_outline_account_balance_wallet_24"
+        android:title="@string/wallet" />
+
+    <item
         android:id="@+id/inboxFragment"
         android:icon="@drawable/ic_outline_inbox_24"
         android:title="@string/inbox" />
@@ -19,10 +24,5 @@
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_person_outline_24"
         android:title="@string/profile" />
-
-    <item
-        android:id="@+id/settingsFragment"
-        android:icon="@drawable/ic_outline_settings_24"
-        android:title="Settings" />
 
 </menu>

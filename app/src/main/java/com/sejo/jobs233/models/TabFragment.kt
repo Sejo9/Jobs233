@@ -1,4 +1,4 @@
-package com.sejo.jobs233.models.data
+package com.sejo.jobs233.models
 
 import androidx.fragment.app.Fragment
 

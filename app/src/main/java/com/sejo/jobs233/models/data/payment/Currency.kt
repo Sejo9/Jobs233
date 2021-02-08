@@ -1,4 +1,4 @@
-package com.sejo.jobs233.models.data
+package com.sejo.jobs233.models.data.payment
 
 data class Currency(
     val id: Int,

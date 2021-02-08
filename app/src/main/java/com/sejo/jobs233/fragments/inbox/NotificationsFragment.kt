@@ -6,18 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.sejo.jobs233.R
+import com.sejo.jobs233.databinding.FragmentNotificationsBinding
 import com.sejo.jobs233.network.checkNetworkConnection
-import kotlinx.android.synthetic.main.fragment_notifications.*
 
 class NotificationsFragment : Fragment() {
+
+    private var _binding: FragmentNotificationsBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        _binding = FragmentNotificationsBinding.inflate(layoutInflater, container, false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notifications, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,15 +30,20 @@ class NotificationsFragment : Fragment() {
             Toast.makeText(activity?.applicationContext, "Network Available", Toast.LENGTH_SHORT)
                 .show()
         } else {
-            notify_no_net_layout.visibility = View.VISIBLE
+            binding.notifyNoNetLayout.visibility = View.VISIBLE
         }
 
-        notif_rety_btn.setOnClickListener {
+        binding.notifRetyBtn.setOnClickListener {
             if (checkNetworkConnection(activity?.applicationContext!!)) {
-                notify_no_net_layout.visibility = View.GONE
-                notifications_recycler.visibility = View.VISIBLE
+                binding.notifyNoNetLayout.visibility = View.GONE
+                binding.notificationsRecycler.visibility = View.VISIBLE
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

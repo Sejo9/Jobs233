@@ -6,14 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
-import com.sejo.jobs233.R
 import com.sejo.jobs233.adapters.viewpager.BasePagerAdapter
+import com.sejo.jobs233.databinding.FragmentProjectsBinding
 import com.sejo.jobs233.fragments.projects.AssignedFragment
 import com.sejo.jobs233.fragments.projects.OngoingFragment
-import com.sejo.jobs233.models.data.TabFragment
-import kotlinx.android.synthetic.main.fragment_projects.*
+import com.sejo.jobs233.models.TabFragment
 
 class ProjectsFragment : Fragment() {
+
+    private var _binding: FragmentProjectsBinding? = null
+    private val binding get() = _binding!!
 
     private val tabFragments = listOf(
         TabFragment("Ongoing", OngoingFragment()),
@@ -24,19 +26,25 @@ class ProjectsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        _binding = FragmentProjectsBinding.inflate(layoutInflater, container, false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_projects, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        projects_viewpager.adapter = BasePagerAdapter(
+        binding.projectsViewpager.adapter = BasePagerAdapter(
             childFragmentManager,
             FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
             tabFragments
         )
 
-        projects_tablayout.setupWithViewPager(projects_viewpager)
+        binding.projectsTablayout.setupWithViewPager(binding.projectsViewpager)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

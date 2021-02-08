@@ -1,7 +1,7 @@
 package com.sejo.jobs233.models.data.project
 
-import com.sejo.jobs233.models.data.Currency
-import com.sejo.jobs233.models.data.User
+import com.sejo.jobs233.models.data.payment.Currency
+import com.sejo.jobs233.models.data.user.User
 
 data class Project(
     val accepted_bid_id: String?,

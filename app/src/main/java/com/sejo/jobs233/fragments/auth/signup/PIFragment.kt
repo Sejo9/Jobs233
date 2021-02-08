@@ -10,31 +10,31 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.sejo.jobs233.R
 import com.sejo.jobs233.activities.AuthActivity
-import kotlinx.android.synthetic.main.fragment_p_i.*
+import com.sejo.jobs233.databinding.FragmentPIBinding
 
 class PIFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private var _binding: FragmentPIBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        _binding = FragmentPIBinding.inflate(layoutInflater, container, false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_p_i, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        pi_next_btn.setOnClickListener {
+        binding.piNextBtn.setOnClickListener {
             if (validateInfo()) {
                 it.findNavController().navigate(R.id.action_PIFragment_to_AIFragment)
             }
         }
-        pi_login_label.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_PIFragment_to_loginFragment))
+        binding.piLoginLabel.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_PIFragment_to_loginFragment))
 
     }
 
@@ -42,24 +42,24 @@ class PIFragment : Fragment() {
 
         var error = false
 
-        val firstName = first_name_layout.editText?.text.toString().trim()
-        val lastName = last_name_layout.editText?.text.toString().trim()
+        val firstName = binding.firstNameLayout.editText?.text.toString().trim()
+        val lastName = binding.lastNameLayout.editText?.text.toString().trim()
 
         if (firstName.isEmpty()) {
-            first_name_layout.error = "First Name Required!"
-            first_name_layout.editText?.requestFocus()
+            binding.firstNameLayout.error = "First Name Required!"
+            binding.firstNameLayout.editText?.requestFocus()
             error = true
             Handler().postDelayed({
-                first_name_layout.error = ""
+                binding.firstNameLayout.error = ""
             }, 3000L)
         }
 
         if (lastName.isEmpty()) {
-            last_name_layout.error = "Last Name Required!"
-            last_name_layout.editText?.requestFocus()
+            binding.lastNameLayout.error = "Last Name Required!"
+            binding.lastNameLayout.editText?.requestFocus()
             error = true
             Handler().postDelayed({
-                last_name_layout.error = ""
+                binding.lastNameLayout.error = ""
             }, 3000L)
         }
 
@@ -75,5 +75,10 @@ class PIFragment : Fragment() {
     private fun setPersonalInfo(firstName: String, lastName: String) {
         AuthActivity.firstName = firstName
         AuthActivity.lastName = lastName
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

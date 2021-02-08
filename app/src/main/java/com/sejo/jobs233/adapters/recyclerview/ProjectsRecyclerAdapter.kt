@@ -1,11 +1,9 @@
 package com.sejo.jobs233.adapters.recyclerview
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.Navigation
@@ -13,14 +11,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sejo.custodianlibrary.CircularImageView
-import com.sejo.jobs233.R
+import com.sejo.jobs233.databinding.ProjectListItemBinding
 import com.sejo.jobs233.fragments.main.ProjectsFragmentDirections
 import com.sejo.jobs233.models.data.project.ProjectAdapterItem
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
-import kotlinx.android.synthetic.main.project_list_item.view.*
 
-class ProjectsRecyclerAdapter(context: Context) :
+class ProjectsRecyclerAdapter :
     ListAdapter<ProjectAdapterItem, ProjectsRecyclerAdapter.ProjectViewHolder>(ProjectDiffCallback()) {
 
     private var projectType: Int = 0
@@ -30,13 +27,14 @@ class ProjectsRecyclerAdapter(context: Context) :
         const val ASSIGNED_PROJECT = 2
     }
 
-    inner class ProjectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val projectTitle: TextView = itemView.project_title
-        val projectBudget: TextView = itemView.project_budget
-        val projectDescription: TextView = itemView.project_description
-        val projectTagsSkills: TextView = itemView.project_tags_skills
-        val projectClientName: TextView = itemView.project_client_name
-        val projectClientPic: CircularImageView = itemView.project_client_pic
+    inner class ProjectViewHolder(binding: ProjectListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        private val projectTitle: TextView = binding.projectTitle
+        private val projectBudget: TextView = binding.projectBudget
+        private val projectDescription: TextView = binding.projectDescription
+        private val projectTagsSkills: TextView = binding.projectTagsSkills
+        private val projectClientName: TextView = binding.projectClientName
+        val projectClientPic: CircularImageView = binding.projectClientPic
 
         fun bind(item: ProjectAdapterItem) {
             projectTitle.text = item.title
@@ -107,9 +105,10 @@ class ProjectsRecyclerAdapter(context: Context) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.project_list_item, parent, false)
-        return ProjectViewHolder(view)
+        val binding =
+            ProjectListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return ProjectViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ProjectViewHolder, position: Int) {

@@ -10,14 +10,15 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navArgs
-import com.sejo.jobs233.R
+import com.sejo.jobs233.databinding.ActivityProjectViewBinding
 import com.sejo.jobs233.viewmodels.factories.ProjectViewViewModelFactory
 import com.sejo.jobs233.viewmodels.projects.ProjectViewViewModel
-import kotlinx.android.synthetic.main.activity_project_view.*
 
 private const val ATTACH_REQUEST_CODE = 188
 
 class ProjectViewActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityProjectViewBinding
 
     private lateinit var viewModel: ProjectViewViewModel
     private lateinit var viewModelFactory: ProjectViewViewModelFactory
@@ -30,9 +31,11 @@ class ProjectViewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_project_view)
+        binding = ActivityProjectViewBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        setSupportActionBar(view_toolbar)
+        setSupportActionBar(binding.viewToolbar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -44,16 +47,17 @@ class ProjectViewActivity : AppCompatActivity() {
         viewModel.project.observe(this, Observer { project ->
             title = project.title
             if (project.subcategory != null) {
-                view_category.text = project.category.name.plus(" > " + project.subcategory.name)
+                binding.viewCategory.text =
+                    project.category.name.plus(" > " + project.subcategory.name)
             } else {
-                view_category.text = project.category.name
+                binding.viewCategory.text = project.category.name
             }
-            view_description.text = project.description
-            view_skills.text = project.skills
-            view_tags.text = project.tags
-            view_offer.text = project.currency.symbol.plus(project.budget)
-            view_budget.text = project.currency.symbol.plus(project.budget)
-            view_client_name.text = project.user.name
+            binding.viewDescription.text = project.description
+            binding.viewSkills.text = project.skills
+            binding.viewTags.text = project.tags
+            binding.viewOffer.text = project.currency.symbol.plus(project.budget)
+            binding.viewBudget.text = project.currency.symbol.plus(project.budget)
+            binding.viewClientName.text = project.user.name
 
             /*Picasso.get().load(BASE_SITE_URL+project.user.profile.picture).into(object : Target {
                 override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
@@ -71,18 +75,18 @@ class ProjectViewActivity : AppCompatActivity() {
         })
 
         viewModel.created.observe(this, Observer {
-            view_created_by.text = prefixes[0].plus("$it by")
+            binding.viewCreatedBy.text = prefixes[0].plus("$it by")
         })
 
         viewModel.joined.observe(this, Observer {
-            view_client_joined.text = prefixes[1].plus(it)
+            binding.viewClientJoined.text = prefixes[1].plus(it)
         })
 
         viewModel.deadline.observe(this, Observer {
-            view_deadline.text = prefixes[2].plus(it)
+            binding.viewDeadline.text = prefixes[2].plus(it)
         })
 
-        view_attach_btn.setOnClickListener {
+        binding.viewAttachBtn.setOnClickListener {
             val checkSelfPermission = ContextCompat.checkSelfPermission(
                 this,
                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -120,9 +124,7 @@ class ProjectViewActivity : AppCompatActivity() {
 
 
     override fun onSupportNavigateUp(): Boolean {
-
         onBackPressed()
-
         return true
     }
 

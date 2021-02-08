@@ -2,18 +2,31 @@ package com.sejo.jobs233.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.sejo.jobs233.R
+import com.sejo.jobs233.database.JobsDatabase
+import com.sejo.jobs233.databinding.ActivityMainBinding
 import com.sejo.jobs233.network.API
-import kotlinx.android.synthetic.main.activity_main.*
+import com.sejo.jobs233.network.checkNetworkConnection
+import com.sejo.jobs233.repositories.UserRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
+        setSupportActionBar(binding.toolbar)
+        title = "Dashboard"
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.main_nav_host_fragment) as NavHostFragment
@@ -21,16 +34,26 @@ class MainActivity : AppCompatActivity() {
         val bottomNavDestinations = setOf(
             R.id.dashboardFragment,
             R.id.projectsFragment,
+            R.id.walletFragment,
             R.id.inboxFragment,
-            R.id.profileFragment,
-            R.id.settingsFragment
+            R.id.profileFragment
         )
         val appBarConfiguration = AppBarConfiguration(bottomNavDestinations)
 
-        bottom_nav.setupWithNavController(navController)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.bottomNav.setupWithNavController(navController)
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 
         API.APIContext = this.applicationContext
+
+
+
+        if (checkNetworkConnection(this)) {
+            val database = JobsDatabase.getInstance(this)
+            lifecycleScope.launch(Dispatchers.IO) {
+                UserRepository(database, this@MainActivity).setUserDetails()
+            }
+
+        }
     }
 
 }

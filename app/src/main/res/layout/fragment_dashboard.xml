@@ -44,6 +44,7 @@
                     android:textColor="@color/black" />
 
                 <TextView
+                    android:id="@+id/dash_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/username"
@@ -51,7 +52,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/credit_bal"
+                    android:id="@+id/dash_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/email"
@@ -68,23 +69,29 @@
             android:layout_marginHorizontal="10dp"
             android:background="?android:attr/listDivider" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginHorizontal="10dp"
-            android:text="Your Balance:"
-            android:textColor="@color/black"
-            android:textSize="22sp" />
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp">
 
-        <TextView
-            android:id="@+id/dash_balance"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:text="$0"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your Balance:"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/dash_balance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp"
+                android:text="$0"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+        </LinearLayout>
+
 
         <View
             android:id="@+id/divider5"
@@ -117,9 +124,10 @@
                     android:paddingTop="5dp">
 
                     <TextView
+                        android:id="@+id/dash_earnings"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="₵0"
+                        android:text="$0"
                         android:textSize="30sp"
                         android:textAlignment="center"
                         android:textColor="@color/black"
@@ -148,6 +156,7 @@
                     android:paddingTop="5dp">
 
                     <TextView
+                        android:id="@+id/dash_assigned"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -179,6 +188,7 @@
                     android:paddingTop="5dp">
 
                     <TextView
+                        android:id="@+id/dash_completed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -198,6 +208,7 @@
         </HorizontalScrollView>
 
         <LinearLayout
+            android:id="@+id/dash_profile_complete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -215,13 +226,14 @@
                 android:textColor="@color/black" />
 
             <ProgressBar
-                android:id="@+id/complete_profile_progressBar"
+                android:id="@+id/profile_progress"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp" />
 
             <Button
+                android:id="@+id/finish_profile_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"

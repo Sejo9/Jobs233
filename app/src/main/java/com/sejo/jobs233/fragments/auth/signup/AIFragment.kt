@@ -11,32 +11,32 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.sejo.jobs233.R
 import com.sejo.jobs233.activities.AuthActivity
-import kotlinx.android.synthetic.main.fragment_a_i.*
+import com.sejo.jobs233.databinding.FragmentAIBinding
 
 class AIFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private var _binding: FragmentAIBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        _binding = FragmentAIBinding.inflate(layoutInflater, container, false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_a_i, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ai_next_btn.setOnClickListener {
+        binding.aiNextBtn.setOnClickListener {
             if (validateInfo()) {
                 it.findNavController().navigate(R.id.action_AIFragment_to_signUpFragment)
             }
         }
 
-        ai_login_label.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_AIFragment_to_loginFragment))
+        binding.aiLoginLabel.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_AIFragment_to_loginFragment))
 
     }
 
@@ -44,48 +44,48 @@ class AIFragment : Fragment() {
 
         var error = false
 
-        val username: String = username_layout.editText?.text.toString().trim()
-        val email: String = sign_email_layout.editText?.text.toString().trim()
-        val password: String = sign_password_layout.editText?.text.toString().trim()
+        val username: String = binding.usernameLayout.editText?.text.toString().trim()
+        val email: String = binding.signEmailLayout.editText?.text.toString().trim()
+        val password: String = binding.signPasswordLayout.editText?.text.toString().trim()
 
         if (username.isEmpty()) {
-            username_layout.error = "Username Required!"
-            username_layout.editText?.requestFocus()
+            binding.usernameLayout.error = "Username Required!"
+            binding.usernameLayout.editText?.requestFocus()
             error = true
             Handler().postDelayed({
-                username_layout.error = ""
+                binding.usernameLayout.error = ""
             }, 3000L)
         }
 
         if (email.isEmpty()) {
-            sign_email_layout.error = "Email Required!"
-            sign_email_layout.editText?.requestFocus()
+            binding.signEmailLayout.error = "Email Required!"
+            binding.signEmailLayout.editText?.requestFocus()
             error = true
             Handler().postDelayed({
-                sign_email_layout.error = ""
+                binding.signEmailLayout.error = ""
             }, 3000L)
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            sign_email_layout.error = "Invalid Email!"
-            sign_email_layout.editText?.requestFocus()
+            binding.signEmailLayout.error = "Invalid Email!"
+            binding.signEmailLayout.editText?.requestFocus()
             error = true
             Handler().postDelayed({
-                sign_email_layout.error = ""
+                binding.signEmailLayout.error = ""
             }, 3000L)
         }
 
         if (password.isEmpty()) {
-            sign_password_layout.error = "Password Required!"
-            sign_password_layout.editText?.requestFocus()
+            binding.signPasswordLayout.error = "Password Required!"
+            binding.signPasswordLayout.editText?.requestFocus()
             error = true
             Handler().postDelayed({
-                sign_password_layout.error = ""
+                binding.signPasswordLayout.error = ""
             }, 3000L)
         } else if (password.length < 8) {
-            sign_password_layout.error = "Password is too short!"
-            sign_password_layout.editText?.requestFocus()
+            binding.signPasswordLayout.error = "Password is too short!"
+            binding.signPasswordLayout.editText?.requestFocus()
             error = true
             Handler().postDelayed({
-                sign_password_layout.error = ""
+                binding.signPasswordLayout.error = ""
             }, 3000L)
         }
 
@@ -102,5 +102,10 @@ class AIFragment : Fragment() {
         AuthActivity.username = username
         AuthActivity.email = email
         AuthActivity.password = password
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

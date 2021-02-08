@@ -29,37 +29,17 @@
         <action
             android:id="@+id/action_inboxFragment_to_messagingActivity"
             app:destination="@id/messagingActivity" />
-        <action
-            android:id="@+id/action_inboxFragment_to_searchUserActivity"
-            app:destination="@id/searchUserActivity" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.sejo.jobs233.fragments.main.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.sejo.jobs233.fragments.settings.SettingsFragment"
-        android:label="@string/settings">
-        <action
-            android:id="@+id/action_settingsFragment_to_editProfileFragment"
-            app:destination="@id/editProfileFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/editProfileFragment"
-        android:name="com.sejo.jobs233.fragments.settings.EditProfileFragment"
-        android:label="@string/edit_profile" />
     <activity
         android:id="@+id/messagingActivity"
         android:name="com.sejo.jobs233.activities.MessagingActivity"
         android:label="activity_messaging"
         tools:layout="@layout/activity_messaging" />
-    <activity
-        android:id="@+id/searchUserActivity"
-        android:name="com.sejo.jobs233.activities.SearchUserActivity"
-        android:label="activity_search_user"
-        tools:layout="@layout/activity_search_user" />
     <activity
         android:id="@+id/projectBidActivity"
         android:name="com.sejo.jobs233.activities.ProjectBidActivity"
@@ -78,4 +58,14 @@
             android:name="projectViewID"
             app:argType="integer" />
     </activity>
+    <fragment
+        android:id="@+id/walletFragment"
+        android:name="com.sejo.jobs233.fragments.main.WalletFragment"
+        android:label="@string/wallet"
+        tools:layout="@layout/fragment_wallet" />
+    <activity
+        android:id="@+id/editProfileActivity"
+        android:name="com.sejo.jobs233.activities.EditProfileActivity"
+        android:label="@string/edit_profile"
+        tools:layout="@layout/activity_edit_profile" />
 </navigation>

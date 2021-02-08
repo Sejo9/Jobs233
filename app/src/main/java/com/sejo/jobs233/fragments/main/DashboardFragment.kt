@@ -7,55 +7,88 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.preference.PreferenceManager
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.sejo.jobs233.R
+import com.sejo.jobs233.databinding.FragmentDashboardBinding
+import com.sejo.jobs233.network.BASE_SITE_URL
+import com.sejo.jobs233.viewmodels.factories.DashboardViewModelFactory
+import com.sejo.jobs233.viewmodels.main.DashboardViewModel
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
-import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 class DashboardFragment : Fragment() {
+
+    private var _binding: FragmentDashboardBinding? = null
+    private val binding get() = _binding!!
+
+    private lateinit var viewModel: DashboardViewModel
+    private lateinit var viewModelFactory: DashboardViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        _binding = FragmentDashboardBinding.inflate(layoutInflater, container, false)
+
+        viewModelFactory = DashboardViewModelFactory(activity?.applicationContext!!)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(DashboardViewModel::class.java)
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dashboard, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loadDashboardInfo()
+        viewModel.userInfo.observe(viewLifecycleOwner, Observer {
+            binding.dashName.text = it.name
+            binding.dashUsername.text = it.username
+            binding.dashEmail.text = it.email
+            binding.dashAssigned.text = it.my_assigned_projects_count.toString()
+            binding.dashCompleted.text = it.completed_projects_count.toString()
+        })
 
-        /*share_link_btn.setOnClickListener {
+        viewModel.currencyInfo.observe(viewLifecycleOwner, Observer {
+            binding.dashBalance.text = it.symbol
+            binding.dashEarnings.text = it.symbol
+        })
 
-            val shareIntent = ShareCompat.IntentBuilder.from(requireActivity())
-                .setText("http://jobs233.com/referal?=selomwise&u23")
-                .setType("text/plain")
-                .intent
-            startActivity(shareIntent)
-        }*/
-    }
+        viewModel.walletInfo.observe(viewLifecycleOwner, Observer {
+            val symbol = binding.dashBalance.text.toString()
+            binding.dashBalance.text = symbol.plus(it.balance)
+        })
 
-    private fun loadDashboardInfo() {
-        dash_name.text = PreferenceManager.getDefaultSharedPreferences(activity?.applicationContext)
-            .getString("fullname", "")
+        viewModel.profileInfo.observe(viewLifecycleOwner, Observer { profEntity ->
+            Picasso.get().load(BASE_SITE_URL + profEntity.picture).into(object : Target {
+                override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
+                    binding.dashImg.setCircularBitmap(bitmap!!)
+                }
 
-        val profilePicURL =
-            "http://192.168.43.161:8000" + PreferenceManager.getDefaultSharedPreferences(activity?.applicationContext)
-                .getString("profile_pic_url", "")
+                override fun onBitmapFailed(e: java.lang.Exception?, errorDrawable: Drawable?) {}
 
-        if (profilePicURL.isNotEmpty()) Picasso.get().load(profilePicURL).into(object : Target {
-            override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
-                dash_img.setCircularBitmap(bitmap!!)
-            }
+                override fun onPrepareLoad(placeHolderDrawable: Drawable?) {}
+            })
 
-            override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
-            }
+            binding.profileProgress.max = 7
 
-            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
+            viewModel.calculateProfilePercentage().let {
+                if (it == 7) {
+                    binding.dashProfileComplete.visibility = View.GONE
+                } else {
+                    binding.profileProgress.progress = it
+                }
             }
         })
+
+        binding.finishProfileBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.editProfileActivity))
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }

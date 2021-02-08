@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.sejo.jobs233.R
+import com.sejo.jobs233.databinding.FragmentSignUpBinding
 import com.sejo.jobs233.viewmodels.auth.SignUpViewModel
-import kotlinx.android.synthetic.main.fragment_sign_up.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,32 +21,36 @@ class SignUpFragment : Fragment() {
 
     private lateinit var viewModel: SignUpViewModel
 
+    private var _binding: FragmentSignUpBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
 
+        _binding = FragmentSignUpBinding.inflate(layoutInflater, container, false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_up, container, false)
+        return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        login_label.setOnClickListener(
+        binding.loginLabel.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_signUpFragment_to_loginFragment)
         )
 
-        register_button.setOnClickListener {
+        binding.registerButton.setOnClickListener {
 
-            viewModel.setPreference(acc_type_group.checkedRadioButtonId)
+            viewModel.setPreference(binding.accTypeGroup.checkedRadioButtonId)
 
-            register_button.visibility = View.INVISIBLE
-            register_button.isEnabled = false
+            binding.registerButton.visibility = View.INVISIBLE
+            binding.registerButton.isEnabled = false
 
-            reg_progress.visibility = View.VISIBLE
+            binding.regProgress.visibility = View.VISIBLE
 
             CoroutineScope(Dispatchers.Main).launch {
                 viewModel.register()
@@ -55,16 +59,16 @@ class SignUpFragment : Fragment() {
 
         viewModel.registerResponse.observe(viewLifecycleOwner, Observer {
             if (it.success) {
-                register_button.visibility = View.VISIBLE
-                register_button.isEnabled = true
-                reg_progress.visibility = View.INVISIBLE
+                binding.registerButton.visibility = View.VISIBLE
+                binding.registerButton.isEnabled = true
+                binding.regProgress.visibility = View.INVISIBLE
 
                 Toast.makeText(activity?.applicationContext, it.message, Toast.LENGTH_SHORT).show()
                 view.findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
             } else {
-                register_button.visibility = View.VISIBLE
-                register_button.isEnabled = true
-                reg_progress.visibility = View.INVISIBLE
+                binding.registerButton.visibility = View.VISIBLE
+                binding.registerButton.isEnabled = true
+                binding.regProgress.visibility = View.INVISIBLE
 
                 Toast.makeText(
                     activity?.applicationContext,
@@ -75,4 +79,8 @@ class SignUpFragment : Fragment() {
         })
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

@@ -5,16 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.sejo.jobs233.R
 import com.sejo.jobs233.adapters.recyclerview.ProjectsRecyclerAdapter
 import com.sejo.jobs233.adapters.recyclerview.ProjectsRecyclerAdapter.Companion.ASSIGNED_PROJECT
+import com.sejo.jobs233.databinding.FragmentAssignedBinding
 import com.sejo.jobs233.viewmodels.projects.AssignedProjectsViewModel
-import kotlinx.android.synthetic.main.fragment_assigned.*
 
 
 class AssignedFragment : Fragment() {
+
+    private var _binding: FragmentAssignedBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var adapter: ProjectsRecyclerAdapter
     private lateinit var viewModel: AssignedProjectsViewModel
@@ -22,37 +23,41 @@ class AssignedFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        adapter = ProjectsRecyclerAdapter(activity?.applicationContext!!)
+        _binding = FragmentAssignedBinding.inflate(layoutInflater, container, false)
+
+        adapter = ProjectsRecyclerAdapter()
 
         viewModel = ViewModelProvider(this).get(AssignedProjectsViewModel::class.java)
 
         adapter.setProjectType(ASSIGNED_PROJECT)
 
-        viewModel.projectsList.observe(viewLifecycleOwner, Observer {
+        viewModel.projectsList.observe(viewLifecycleOwner, {
             adapter.submitList(it)
         })
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_assigned, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        assigned_progress.visibility = View.VISIBLE
+        binding.assignedProgress.visibility = View.VISIBLE
 
-        viewModel.projectsLoaded.observe(viewLifecycleOwner, Observer {
+        viewModel.projectsLoaded.observe(viewLifecycleOwner, {
             if (it) {
-                assigned_progress.visibility = View.GONE
-                assigned_recycler.adapter = adapter
+                binding.assignedProgress.visibility = View.GONE
+                binding.assignedRecycler.adapter = adapter
                 viewModel.projectsLoadingComplete()
             }
         })
-
-
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

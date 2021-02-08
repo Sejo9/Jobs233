@@ -32,11 +32,7 @@ fun checkNetworkConnection(context: Context): Boolean {
     } else {
         val activeNetworkInfo = connectivityManager.activeNetworkInfo
 
-        if (activeNetworkInfo != null) {
-            return true
-        }
-
-        return false
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected
     }
 
 }

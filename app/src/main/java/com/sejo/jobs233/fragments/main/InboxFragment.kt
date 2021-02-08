@@ -6,14 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
-import com.sejo.jobs233.R
 import com.sejo.jobs233.adapters.viewpager.BasePagerAdapter
+import com.sejo.jobs233.databinding.FragmentInboxBinding
 import com.sejo.jobs233.fragments.inbox.MessagesFragment
 import com.sejo.jobs233.fragments.inbox.NotificationsFragment
-import com.sejo.jobs233.models.data.TabFragment
-import kotlinx.android.synthetic.main.fragment_inbox.*
+import com.sejo.jobs233.models.TabFragment
 
 class InboxFragment : Fragment() {
+
+    private var _binding: FragmentInboxBinding? = null
+    private val binding get() = _binding!!
 
     private val tabFragments = listOf(
         TabFragment("Messages", MessagesFragment()),
@@ -23,21 +25,27 @@ class InboxFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        _binding = FragmentInboxBinding.inflate(layoutInflater, container, false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_inbox, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        inbox_viewpager.adapter = BasePagerAdapter(
+        binding.inboxViewpager.adapter = BasePagerAdapter(
             childFragmentManager,
             FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
             tabFragments
         )
 
-        inbox_tablayout.setupWithViewPager(inbox_viewpager)
+        binding.inboxTablayout.setupWithViewPager(binding.inboxViewpager)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

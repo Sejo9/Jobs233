@@ -1,6 +1,6 @@
 package com.sejo.jobs233.models.data.inbox
 
-import com.sejo.jobs233.models.data.User
+import com.sejo.jobs233.models.data.user.User
 
 data class MessageContact(
     val id: Int,

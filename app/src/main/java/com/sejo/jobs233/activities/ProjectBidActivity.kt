@@ -5,12 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navArgs
-import com.sejo.jobs233.R
+import com.sejo.jobs233.databinding.ActivityProjectBidBinding
 import com.sejo.jobs233.viewmodels.factories.ProjectBidViewModelFactory
 import com.sejo.jobs233.viewmodels.projects.ProjectBidViewModel
-import kotlinx.android.synthetic.main.activity_project_bid.*
 
 class ProjectBidActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityProjectBidBinding
 
     private lateinit var viewModel: ProjectBidViewModel
     private lateinit var viewModelFactory: ProjectBidViewModelFactory
@@ -24,9 +25,11 @@ class ProjectBidActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_project_bid)
+        binding = ActivityProjectBidBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        setSupportActionBar(bid_toolbar)
+        setSupportActionBar(binding.bidToolbar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -39,28 +42,29 @@ class ProjectBidActivity : AppCompatActivity() {
             title = project.title
 
             if (project.subcategory != null) {
-                bid_category.text = project.category.name.plus(" > " + project.subcategory.name)
+                binding.bidCategory.text =
+                    project.category.name.plus(" > " + project.subcategory.name)
             } else {
-                bid_category.text = project.category.name
+                binding.bidCategory.text = project.category.name
             }
-            bid_description.text = project.description
-            bid_skills.text = project.skills
-            bid_tags.text = project.tags
-            bid_bids_count.text = prefixes[0].plus(project.bids_count.toString())
-            bid_views.text = prefixes[1].plus(project.bids_count)
-            bid_budget.text = project.currency.symbol.plus(project.budget)
-            bid_client_name.text = project.user.name
+            binding.bidDescription.text = project.description
+            binding.bidSkills.text = project.skills
+            binding.bidTags.text = project.tags
+            binding.bidBidsCount.text = prefixes[0].plus(project.bids_count.toString())
+            binding.bidViews.text = prefixes[1].plus(project.bids_count)
+            binding.bidBudget.text = project.currency.symbol.plus(project.budget)
+            binding.bidClientName.text = project.user.name
 
             //bid_client_pic.setCircularBitmap(viewModel.bitmap.value!!)
 
         })
 
         viewModel.created.observe(this, Observer {
-            bid_created_by.text = prefixes[2].plus("$it by")
+            binding.bidCreatedBy.text = prefixes[2].plus("$it by")
         })
 
         viewModel.joined.observe(this, Observer {
-            bid_joined.text = prefixes[3].plus(it)
+            binding.bidJoined.text = prefixes[3].plus(it)
         })
 
     }
